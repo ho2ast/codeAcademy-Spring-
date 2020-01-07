@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.mapper.BoardMapper">
+
+	<select id="nextBoardNum" resultType="int">
+		SELECT IFNULL(MAX(num),0)+1 AS bnum FROM boards
+	</select>
+
+	<insert id="insertBoard">
+		INSERT INTO boards (num, username, passwd, subject, content, readcount, ip, reg_date, re_ref, re_lev, re_seq, category)
+		VALUES (#{num}, #{username}, #{passwd}, #{subject}, #{content}, #{readcount}, #{ip}, current_timestamp, #{reRef}, #{reLev}, #{reSeq}, #{category})
+	</insert>
+
+	<select id="getBoards" resultType="BoardVO">
+		SELECT *
+		FROM boards
+		WHERE category = #{category}
+		<if test="search != null and search != ''"> <!-- IF가 참일경우에 실행 -->
+			AND subject LIKE CONCAT('%', #{search}, '%')
+		</if>
+		ORDER BY re_ref DESC, re_seq ASC
+		LIMIT #{pageSize} OFFSET #{startRow}
+	</select>
+
+	<select id="getBoardList" resultType="BoardVO">
+		SELECT *
+		FROM boards
+		ORDER BY
+		num DESC
+	</select>
+
+	<select id="getBoardCount" resultType="int">
+		SELECT COUNT(*)
+		FROM boards
+		WHERE category = #{category}
+		<if test="search != null and search != ''">
+			AND subject LIKE CONCAT('%', #{search}, '%')
+		</if>
+	</select>
+
+	<update id="updateReadcount">
+		UPDATE boards
+		SET readcount = readcount + 1
+		WHERE num =
+		#{num}
+	</update>
+
+	<select id="getBoard" resultType="BoardVO">
+		SELECT *
+		FROM boards
+		WHERE num =
+		#{num}
+	</select>
+
+	<select id="countByNumAndPasswd" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		boards
+		WHERE num = #{num} AND passwd = #{passwd}
+	</select>
+
+	<delete id="deleteBoard">
+		DELETE FROM boards
+		WHERE num = #{num}
+	</delete>
+
+	<update id="updateBoard">
+		UPDATE boards
+		SET subject = #{subject}, content =
+		#{content}
+		WHERE num = #{num}
+	</update>
+
+	<update id="updateReplyGroupBySequence">
+		UPDATE boards
+		SET re_seq = re_seq + 1
+		WHERE re_ref =
+		#{reRef}
+		AND re_seq > #{reSeq}
+	</update>
+
+	<select id="getCountPostByCategory" resultType="Map">
+		SELECT DATE_FORMAT(reg_date, '%Y-%M') AS month,
+		SUM(IF(category='자유', 1, 0)) AS board,
+		SUM(IF(category='자료', 1, 0)) AS download,
+		SUM(IF(category='질문', 1, 0)) AS qna
+		FROM boards
+		GROUP BY DATE_FORMAT(reg_date, '%Y-%M')
+		ORDER BY DATE_FORMAT(reg_date, '%Y-%M')
+	</select>
+</mapper>

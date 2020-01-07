@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 매핑된 SQL 구문 살펴보기 -->
+<mapper namespace="com.exam.mapper.MemberMapper">
+
+	<insert id="insertMember" parameterType="MemberVO">
+		INSERT INTO members (id, passwd, name, reg_date, email, tel, gender) 
+		VALUES (#{id}, #{passwd}, #{name}, current_timestamp, #{email}, #{tel}, #{gender})
+	</insert>
+	
+</mapper>
