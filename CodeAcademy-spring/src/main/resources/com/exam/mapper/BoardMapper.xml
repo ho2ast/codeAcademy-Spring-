@@ -68,8 +68,7 @@
 
 	<update id="updateBoard">
 		UPDATE boards
-		SET subject = #{subject}, content =
-		#{content}
+		SET subject = #{subject}, content =	#{content}
 		WHERE num = #{num}
 	</update>
 

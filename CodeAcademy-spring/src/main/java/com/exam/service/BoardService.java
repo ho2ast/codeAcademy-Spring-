@@ -12,8 +12,11 @@ import com.exam.domain.BoardVO;
 import com.exam.mapper.AttachMapper;
 import com.exam.mapper.BoardMapper;
 
+import lombok.extern.log4j.Log4j;
+
 @Service
 @Transactional
+@Log4j
 public class BoardService {
 
 	@Autowired
@@ -60,4 +63,28 @@ public class BoardService {
 	}
 	
 	//=====================================================================================================
+	public void updateBoard(BoardVO boardVO) {
+		boardMapper.updateBoard(boardVO);
+	}
+	
+	//=====================================================================================================
+	public void deleteBoard(int num) {
+		boardMapper.deleteBoard(num);
+	}
+	
+	//=====================================================================================================
+	public void reInsertBoard(BoardVO boardVO) {
+		// 같은 글그룹에서의 답글순서(re_seq) 재배치 update수행
+		// 조건 re_ref같은그룹 re_seq 큰값은 re_seq+1
+		boardMapper.updateReplyGroupBySequence(boardVO.getReRef(), boardVO.getReSeq());
+		
+		// 답글 insert re_ref그대로 re_lev+1 re_seq+1
+		// re_lev 는 [답글을 다는 대상글]의 들여쓰기값 + 1
+		boardVO.setReLev(boardVO.getReLev() + 1);
+		// re_seq 는 [답글을 다는 대상글]의 글그룹 내 순번값 + 1
+		boardVO.setReSeq(boardVO.getReSeq() + 1);
+		log.info("답글: " + boardVO);
+		// 답글 insert 수행
+		boardMapper.insertBoard(boardVO);
+	}
 }

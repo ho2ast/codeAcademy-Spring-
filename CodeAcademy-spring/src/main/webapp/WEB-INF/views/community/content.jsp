@@ -92,25 +92,25 @@
 						<button type="button" class="delete_btn" onclick="checkDelete()">삭제</button>
 				<c:choose>
 					<c:when test="${prevPage eq 'board'}">
-						<button type="button" class="update_sub" onclick="location.href='communityUpdateForm.do?num=${boardVO.num }&pageNum=${pageNum}&prevPage=${prevPage}';">수정</button>
+						<button type="button" class="update_sub" onclick="location.href='/community/modify?num=${boardVO.num}&pageNum=${pageNum}&prevPage=${prevPage}';">수정</button>
 					</c:when>
 					<c:when test="${prevPage eq 'qna'}">
-						<button type="button" class="update_sub" onclick="location.href='communityUpdateForm.do?num=${boardVO.num }&pageNum=${pageNum}&prevPage=${prevPage}';">수정</button>
+						<button type="button" class="update_sub" onclick="location.href='/community/modify?num=${boardVO.num}&pageNum=${pageNum}&prevPage=${prevPage}';">수정</button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" class="update_sub" onclick="location.href='communityUpdateForm.do?num=${boardVO.num }&pageNum=${pageNum}&prevPage=${prevPage}';">수정</button>
+						<button type="button" class="update_sub" onclick="location.href='/community/modify?num=${boardVO.num}&pageNum=${pageNum}&prevPage=${prevPage}';">수정</button>
 					</c:otherwise>
 				</c:choose>
 				
 				<c:choose>
 					<c:when test="${prevPage eq 'board'}">
-						<button type="button" class="reWrite_sub" onclick="location.href='communityRewriteForm.do?reRef=${boardVO.reRef}&reLev=${boardVO.reLev}&reSeq=${boardVO.reSeq}&Subject=${boardVO.subject}&pageNum=${pageNum}&prevPage=${prevPage }&Category=${boardVO.category }';">답글쓰기</button>
+						<button type="button" class="reWrite_sub" onclick="location.href='/community/rewrite?reRef=${boardVO.reRef}&reLev=${boardVO.reLev}&reSeq=${boardVO.reSeq}&subject=${boardVO.subject}&pageNum=${pageNum}&prevPage=${prevPage }&category=${boardVO.category }';">답글쓰기</button>
 					</c:when>
 					<c:when test="${prevPage eq 'qna'}">
-						<button type="button" class="reWrite_sub" onclick="location.href='communityRewriteForm.do?reRef=${boardVO.reRef}&reLev=${boardVO.reLev}&reSeq=${boardVO.reSeq}&Subject=${boardVO.subject}&pageNum=${pageNum}&prevPage=${prevPage }&Category=${boardVO.category }';">답글쓰기</button>
+						<button type="button" class="reWrite_sub" onclick="location.href='/community/rewrite?reRef=${boardVO.reRef}&reLev=${boardVO.reLev}&reSeq=${boardVO.reSeq}&subject=${boardVO.subject}&pageNum=${pageNum}&prevPage=${prevPage }&category=${boardVO.category }';">답글쓰기</button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" class="reWrite_sub" onclick="location.href='communityRewriteForm.do?reRef=${boardVO.reRef}&reLev=${boardVO.reLev}&reSeq=${boardVO.reSeq}&Subject=${boardVO.subject}&pageNum=${pageNum}&prevPage=${prevPage }&Category=${boardVO.category }';">답글쓰기</button>
+						<button type="button" class="reWrite_sub" onclick="location.href='/community/rewrite?reRef=${boardVO.reRef}&reLev=${boardVO.reLev}&reSeq=${boardVO.reSeq}&subject=${boardVO.subject}&pageNum=${pageNum}&prevPage=${prevPage }&category=${boardVO.category }';">답글쓰기</button>
 					</c:otherwise>
 				</c:choose>
 				
@@ -208,7 +208,7 @@
 	function checkDelete() {
 		var result = confirm('${boardVO.num}번 글을 정말로 삭제하시겠습니까??');
 		if (result == true) {
-			location.href='communityDeleteAction.do?num=${boardVO.num}&pageNum=${pageNum}&prevPage=${prevPage}';
+			location.href='/community/delete?num=${boardVO.num}&pageNum=${pageNum}&prevPage=${prevPage}';
 		}
 	}
 </script>

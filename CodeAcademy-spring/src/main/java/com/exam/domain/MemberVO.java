@@ -13,5 +13,4 @@ public class MemberVO {
 	private String email;
 	private String tel;
 	private String gender;
-	
 }

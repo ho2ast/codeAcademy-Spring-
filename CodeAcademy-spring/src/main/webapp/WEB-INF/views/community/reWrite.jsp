@@ -46,11 +46,11 @@
 			<div id="write_header">
 				<h2>답글쓰기</h2>
 			</div>
-			<form action="communityRewrite.do" method="post" class="form-horizontal" id="board_write_form" name="frm" onsubmit="return check();">
-			<input type="hidden" name="reRef" value="${reRef}" />
-			<input type="hidden" name="reLev" value="${reLev}" />
-			<input type="hidden" name="reSeq" value="${reSeq}" />
-			<input type="hidden" name="Category" value="${category}" />
+			<form action="/community/rewrite" method="post" class="form-horizontal" id="board_write_form" name="frm" onsubmit="return check();">
+			<input type="hidden" name="reRef" value="${boardVO.reRef}" />
+			<input type="hidden" name="reLev" value="${boardVO.reLev}" />
+			<input type="hidden" name="reSeq" value="${boardVO.reSeq}" />
+			<input type="hidden" name="category" value="${boardVO.category}" />
 			<input type="hidden" name="pageNum" value="${pageNum}">
 			<input type="hidden" name="prevPage" value="${prevPage}">
 					<div class="col-md-5">
@@ -59,7 +59,7 @@
 					</div>
 					<div class="col-md-5">
 						<div id="write_label">제목</div>
-						<div id="input"><input type="text" class="form-control" name="subject" rows="20" value="[답글] ${subject}"></div>
+						<div id="input"><input type="text" class="form-control" name="subject" rows="20" value="답글: ${boardVO.subject}"></div>
 					</div>
 <!-- 					<div class="col-md-5" id="file_container"> -->
 <!-- 						<div id="write_label">파일</div> -->

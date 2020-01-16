@@ -51,7 +51,7 @@ public class CommunityUpdateAction implements Action {
 		// 수정할 글번호, 패스워드, pageNum가져오기
 		String pageNum = multi.getParameter("pageNum");
 		int num = Integer.parseInt(multi.getParameter("num"));
-		String passwd = multi.getParameter("passwd");
+//		String passwd = multi.getParameter("passwd");
 
 		BoardDao boardDao = BoardDao.getInstance();
 

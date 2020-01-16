@@ -15,13 +15,11 @@ if (cookies != null) {
 		}
 	}
 }
-
 %>
 
 <%
 // 세션값 가져오기 "id"
 id = (String) session.getAttribute("id");
-
 %>
 	<header class="fixed_top">
 

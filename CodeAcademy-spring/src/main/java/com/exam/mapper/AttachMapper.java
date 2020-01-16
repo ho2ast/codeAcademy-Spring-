@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import com.exam.domain.AttachVO;
 
@@ -19,4 +20,10 @@ public interface AttachMapper {
 	
 	@Delete("DELETE FROM attaches WHERE uuid = #{uuid}")
 	public void deleteAttachByUuid(String uuid);
+	
+	@Select("SELECT CONCAT(uuid,'_',filename) AS str FROM attaches WHERE bno = #{bno}")
+	public List<String> getUuidAndFilenameByBno(int bno);
+	
+	@Select("SELECT DISTINCT(uploadpath) FROM attaches WHERE bno = #{bno}")
+	public List<String> getUploadpathByBno(int bno);
 }

@@ -22,4 +22,20 @@ public class AttachService {
 	public void insertAttach(AttachVO attachVO) {
 		attachMapper.insertAttach(attachVO);
 	}
+	
+	public void deleteAttachByBno(int num) {
+		attachMapper.deleteAttachByBno(num);
+	}
+	
+	public void deleteAttachByUuid(String uuid) {
+		attachMapper.deleteAttachByUuid(uuid);
+	}
+	
+	public List<String> getUuidAndFilenameByBno(int num) {
+		return attachMapper.getUuidAndFilenameByBno(num);
+	}
+	
+	public List<String> getUploadpathByBno(int num) {
+		return attachMapper.getUploadpathByBno(num);
+	}
 }
